@@ -17,8 +17,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light // Игнор тёмной темы системы
         searchBar.delegate = self
-        searchBar.searchTextField.textColor = .white
+        searchBar.searchTextField.textColor = .white // Текст searchBar становится белым
         iconImage.isHidden = true
     }
 }
@@ -92,12 +93,14 @@ extension ViewController: UISearchBarDelegate {
                         }
                         
                         self?.cityLabel.text = locationName // Вывод запрошенного города
+                
                         if (tempRound > 0) {
                             self?.temperatureLable.text = "+\(tempRound)°" // Вывод температуры > 0
                         }
                         else {
                             self?.temperatureLable.text = "\(tempRound)°" // Вывод температуры <= 0
                         }
+                        
                         downloadImage(from: URLIcon!) // Вывод иконки погоды
                         self?.temperatureLable.isHidden = false
                         self?.iconImage.isHidden = false

@@ -16,15 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" text="" translatesAutoresizingMaskIntoConstraints="NO" id="nRf-9I-I9m">
-                                <rect key="frame" x="0.0" y="111" width="390" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" text="" translatesAutoresizingMaskIntoConstraints="NO" id="nRf-9I-I9m">
+                                <rect key="frame" x="0.0" y="111" width="390" height="51"/>
                                 <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSf-G4-MSM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VSf-G4-MSM">
                                 <rect key="frame" x="16" y="64" width="148" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -56,9 +54,14 @@
                             <constraint firstItem="Ybi-dA-OxY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="7tP-Mx-57s"/>
                             <constraint firstItem="Ybi-dA-OxY" firstAttribute="top" secondItem="Ixp-qP-K9D" secondAttribute="bottom" constant="0.33000000000000002" id="E1V-zf-wAS"/>
                             <constraint firstItem="Ybi-dA-OxY" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Lbl-Eq-gRe"/>
+                            <constraint firstItem="VSf-G4-MSM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Sce-JZ-hM5"/>
                             <constraint firstItem="Hdd-hd-USc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UOV-sa-vH0"/>
+                            <constraint firstItem="nRf-9I-I9m" firstAttribute="top" secondItem="VSf-G4-MSM" secondAttribute="bottom" id="dtj-6z-j8e"/>
+                            <constraint firstItem="nRf-9I-I9m" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e4B-DU-jTd"/>
                             <constraint firstItem="Ixp-qP-K9D" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="e6O-02-fBf"/>
+                            <constraint firstItem="nRf-9I-I9m" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gXH-qA-lWz"/>
                             <constraint firstItem="Hdd-hd-USc" firstAttribute="top" secondItem="Ybi-dA-OxY" secondAttribute="bottom" id="j9j-CB-TqQ"/>
+                            <constraint firstItem="VSf-G4-MSM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vSN-1b-FMY"/>
                         </constraints>
                     </view>
                     <connections>
