@@ -17,29 +17,36 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        overrideUserInterfaceStyle = .light // Игнор тёмной темы системы
+        overrideUserInterfaceStyle = .light // Игнорирование тёмной темы системы
         searchBar.delegate = self
         searchBar.searchTextField.textColor = .white // Текст searchBar становится белым
         iconImage.isHidden = true
     }
 }
 
+/*!
+    Расширение класса ViewController при помощи UISearchBarDelegate
+*/
 extension ViewController: UISearchBarDelegate {
     
+    /*!
+        Функция searchBarSearchButtonClicked реализующая всю основную работу приложения
+        \param searchBar
+    */
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder() // Функция убирающая софтверную клаву после ввода
         
-        let urlString = "https://api.weatherapi.com/v1/current.json?key=bf9db530eaa1450380b185133220310&q=\(searchBar.text!.replacingOccurrences(of: " ", with: "%20"))&aqi=no" // Наш основной URL в виде JSON
+        let urlString = "https://api.weatherapi.com/v1/current.json?key=2879fee53e4b4e52bbd62501232802&q=\(searchBar.text!.replacingOccurrences(of: " ", with: "%20"))&aqi=no" // Наш основной URL в виде JSON
         let url = URL(string: urlString)
         
-        var locationName: String?
-        var temperature: Double?
-        var statusWeather: String?
-        var iconWeather: String?
-        var errorHasOccured: Bool = false
+        var locationName: String? // Название города
+        var temperature: Double? // Температура
+        var statusWeather: String? // Статус погоды
+        var iconWeather: String? // Иконка погоды
+        var errorHasOccured: Bool = false // Переменная на случай ошибки запроса
         
         let task = URLSession.shared.dataTask(with: url!) {[weak self] (data, response, error) in
-            print(url!) // Для проверки
+            print(url!) // Для проверки вывод запрашиваемого URL
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! [String : AnyObject]
@@ -50,15 +57,19 @@ extension ViewController: UISearchBarDelegate {
                 }
                 // Если нет, то находим нужные данные
                 else {
+                    // Если переменная location соответсьвует JSON элемену location
                     if let location = json["location"] {
-                        locationName = location["name"] as? String // Данные местоположения
+                        locationName = location["name"] as? String // Присвоить JSON данные переменной location
                     }
                     
+                    // Если переменная current соответсьвует JSON элемену current
                     if let current = json["current"] {
-                        temperature = current["temp_c"] as? Double // Данные температуры в Цельсия
+                        temperature = current["temp_c"] as? Double // Присвоить JSON данные temp_c переменной temperature
+                        
+                        // Если переменная conditionObject соответсьвует JSON элемену condition
                         if let conditionObject = current["condition"] as? AnyObject {
-                            statusWeather = conditionObject["text"] as? String // Данные статуса погоды
-                            iconWeather = conditionObject["icon"] as? String // Ссылка на PNG иконку
+                            statusWeather = conditionObject["text"] as? String // Присвоить JSON данные text переменной statusWeather
+                            iconWeather = conditionObject["icon"] as? String // Присвоить JSON данные icon переменной iconWeather
                         }
                     }
                     print("https:" + iconWeather!) // Для проверки
@@ -66,22 +77,32 @@ extension ViewController: UISearchBarDelegate {
                 }
                 
                 DispatchQueue.main.async {
+                    // Работа программы на случай ошибочного запроса
                     if errorHasOccured {
-                        self?.cityLabel.text = "Error city" // Вывод ошибки в названии города
+                        self?.cityLabel.text = "City not found" // Вывод ошибки в названии города
                         self?.temperatureLable.isHidden = true
                         self?.iconImage.isHidden = true
                     }
+                    // Работа программы на случай если запрос прошёл успешно
                     else {
                         var tempRound: Int
                         tempRound = lround(temperature!) // Округление значений температуры
                         
                         let completeURLIcon = "https:" + iconWeather!
                         let URLIcon = URL(string: completeURLIcon)
-                        // Делает URL иконки
+                    
+                        /*!
+                            Делает URL иконки
+                            \param from URLIcon: URL, completion: клоужер escaping с param Data?, URLResponse?, Error?
+                        */
                         func getData(from URLIcon: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
                             URLSession.shared.dataTask(with: URLIcon, completionHandler: completion).resume()
                         }
-                        // Скачивание иконки с помощью URL
+                        
+                        /*!
+                            Скачивание иконки с помощью URL
+                            \param from URLIcon: URL
+                        */
                         func downloadImage(from URLIcon: URL) {
                             getData(from: URLIcon) { data, response, error in
                                 guard let data = data, error == nil else { return }
@@ -107,10 +128,12 @@ extension ViewController: UISearchBarDelegate {
                     }
                 }
             }
+            // Ловит ошибку
             catch let jsonError {
                 print(jsonError)
             }
         }
+        // Результат работы функции searchBarSearchButtonClicked
         task.resume()
     }
 }
