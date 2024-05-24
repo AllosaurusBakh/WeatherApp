@@ -1,6 +1,6 @@
 # WeatherApp for iOS
 
-<img width="534" alt="Снимок экрана 2024-05-24 в 15 12 22" src="https://github.com/AllosaurusBakh/WeatherApp/assets/95144293/52429bdc-88fb-48c2-946b-c16f7514c82b">
+<img width="400" alt="Снимок экрана 2024-05-24 в 15 12 22" src="https://github.com/AllosaurusBakh/WeatherApp/assets/95144293/52429bdc-88fb-48c2-946b-c16f7514c82b">
 
 ## Задача
 Реализовать первое приложение для iOS платформы.
